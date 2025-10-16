@@ -43,9 +43,11 @@ optimizeDeps: {
 
 ## Expected Behavior
 
-Vite's dev server should be able to optimize Vuetify components when using wildcard patterns in `optimizeDeps.include`, or at least provide a clear error message about the unsupported pattern.
+The dev server should either:
+1. Successfully handle the wildcard pattern and optimize the dependencies, or
+2. Provide a clear error message indicating that wildcard patterns are not supported in this context
 
 ## Actual Behavior
 
-The dev server fails with a CSS resolution error during the dependency optimization phase. The production build works fine, but development is blocked.
+The dev server fails with a CSS resolution error during the dependency optimization phase. The error message is misleading as it suggests a CSS file is missing, when the actual issue is related to how the wildcard pattern is being processed. The production build works fine, but development is blocked.
 
