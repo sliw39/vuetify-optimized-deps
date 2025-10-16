@@ -3,7 +3,7 @@ Small project to demonstrate a build issue with vuetify
 
 ## Issue
 
-When using Vite with Vuetify 3.10.5 and adding `vuetify/components/*` to the `optimizeDeps.include` configuration, the build fails with the following error:
+When using Vite with Vuetify 3.10.5 and adding `vuetify/components/*` to the `optimizeDeps.include` configuration, the **dev server** fails with the following error:
 
 ```
 ✘ [ERROR] Could not resolve "./VOverflowBtn.css"
@@ -12,6 +12,8 @@ When using Vite with Vuetify 3.10.5 and adding `vuetify/components/*` to the `op
       5 │ import "./VOverflowBtn.css";
         ╵        ~~~~~~~~~~~~~~~~~~~~
 ```
+
+**Note**: The production build (`npm run build`) succeeds, but the dev server (`npm run dev`) fails during the dependency optimization phase.
 
 ## Reproduction Steps
 
@@ -41,9 +43,9 @@ optimizeDeps: {
 
 ## Expected Behavior
 
-Vite should be able to optimize Vuetify components when using wildcard patterns in `optimizeDeps.include`.
+Vite's dev server should be able to optimize Vuetify components when using wildcard patterns in `optimizeDeps.include`, or at least provide a clear error message about the unsupported pattern.
 
 ## Actual Behavior
 
-Vite fails with a CSS resolution error during the dependency optimization phase.
+The dev server fails with a CSS resolution error during the dependency optimization phase. The production build works fine, but development is blocked.
 
